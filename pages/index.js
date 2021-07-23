@@ -19,6 +19,7 @@ export default function Home({ allPostsData }) {
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
+        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
       </Head>
       <section className={utilStyles.headingMd}>
         <p>Hello I'm Lwandile and I develop websites using Next.js, a React framework designed for production.</p>
@@ -42,6 +43,17 @@ export default function Home({ allPostsData }) {
             </li>
           ))}
         </ul>
+        <script>
+          if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+              if (!user) {
+                window.netlifyIdentity.on("login", () => {
+                  document.location.href = "/admin/";
+                })
+              }
+            })
+          }
+        </script>
       </section>
     </Layout>
   )
